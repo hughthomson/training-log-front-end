@@ -1,0 +1,127 @@
+.login > * {
+    max-width: 400px;
+    margin: auto;
+    border: 1px solid #E5E5E5;
+    border-radius: 8px;
+    margin-top: 50px;
+    padding: 25px;
+    font-size: 13px;
+}
+
+.content {
+    text-align: left;
+}
+
+.entryField {
+    margin-bottom: 10px;
+}
+
+.login-btn {
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    height: auto;
+    width: 100%;
+    font-size: 13px !important;
+    font-weight: 700;
+    padding: 9px 12px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background: 0;
+    background-color: #35A7FF;
+    color: #fff !important;
+    text-shadow: none;
+    border: 1px solid transparent;
+}
+
+.login-btn:hover {
+    background-color: #1f9dfd;
+}
+
+.login-header {
+    font-size: 26px;
+    margin: 0;
+    margin-bottom: 30px;
+}
+
+.login-seperator {
+    margin: 1em 0;
+    padding: 0;
+    border: 0;
+    color: #E5E5E5;
+    background-color: #E5E5E5;
+    height: 1px;
+}
+
+.entryInput {
+    border: 1px solid#ddd;
+    border-radius: 5px;
+    padding: 0.5em 0.75em;
+    box-sizing: border-box;
+    width: 100%;
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.entryLabel {
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-size: 13px;
+    display: block;
+}
+
+.stayLoginLabel {
+    font-size: 13px;
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.login-with-google-btn {
+    cursor: pointer;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 100%;
+    font-weight: 400;
+    font-size: 13px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    background: #fff;
+    border: 1px solid #ddd;
+    text-align: center;
+    text-shadow: none;
+    padding: 6px !important;
+    line-height: 24px;
+    min-width: 273px;
+    color: black !important;
+}
+
+.login-with-google-btn > img {
+    margin-right: 5px;
+}
+
+
+.login-with-google-btn:hover {
+    border: 1px solid rgb(192, 192, 192);
+}
+
+.link {
+    color: #35A7FF;
+    text-decoration: none;
+}
+
+p > a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 740px) {
+    .login > * {
+        border: none;
+    }
+
+    .content {
+        margin-top: 0px;
+    }
+}

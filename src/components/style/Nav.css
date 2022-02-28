@@ -1,0 +1,122 @@
+body {
+    max-width: none;
+}
+
+.nav {
+    font-size: 18px;
+    box-shadow: 0 1px 5px rgb(0 0 0 / 0.2);
+}
+
+.navbar {
+    width: 100%;
+    background-color: white;
+}
+
+.nav-content {
+    margin: auto;
+    max-width: 1200px;
+}
+
+.nav-link{
+    color: black !important;
+    font-weight: 500;
+}
+
+.navbar-brand {
+    color: black !important;
+    font-weight: 500;
+}
+
+.container-fluid {
+    max-width: 1200px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(255, 255, 255);
+}
+
+li {
+    float: left;
+}
+
+#logoutID {
+    padding-top: 17px;
+    padding-bottom: 17px;
+}
+
+li:last-child {
+    border-right: none;
+}
+
+li a {
+    display: block;
+    color: #2A2B2E;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.logo) {
+    background-color: #FBFBFB;
+    border-bottom: 2px solid #35A7FF;
+}
+
+.logo {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.nav-header {
+    float: left;
+}
+
+.list-item {
+    float: right;
+}
+
+.nav-content-collapsed {
+    display: none;
+}
+
+
+@media (max-width: 740px) {
+    .list-item {
+        float: left;
+    }
+
+    .nav-content-collapsed {
+        display: block;
+    }
+
+    .nav-content {
+        display: none;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 180px;
+      }
+      
+      li a {
+        display: block;
+        color: #000;
+        padding: 8px 16px;
+        text-decoration: none;
+      }
+      
+      li {
+        text-align: center;
+      }
+}

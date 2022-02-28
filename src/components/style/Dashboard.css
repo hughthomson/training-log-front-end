@@ -1,0 +1,157 @@
+.dashboard-container {
+    max-width: 1200px;
+    padding: 20px;
+    padding-bottom: 0;
+    padding-top: 0;
+    margin: auto;
+}
+
+/* .tracked-lifts-container {
+    background-color: aliceblue;
+    margin-top: 80px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    column-gap: 50pt;
+    row-gap: 20pt;
+}
+
+.graph-item {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin-bottom: auto;
+} */
+
+.tracked-lifts-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    padding: 20px;
+    padding-top: 0;
+    padding-bottom: 20px;
+    margin: auto;
+    margin-bottom: 15px;
+}
+
+.body-metrics-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    padding: 20px;
+    padding-top: 0;
+    padding-bottom: 20px;
+    margin: auto;
+}
+
+.secondary-section {
+    width: 100%;
+    background-color: rgb(247, 247, 247);
+    padding-top: 25px;
+}
+  
+.graph-item {
+    flex: 1 0 33%;
+    margin: 5px;
+}
+
+#tracked-lifts-header {
+    text-align: left;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-size: 25px;
+}
+
+.action-center {
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.icon-button {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 0;
+    padding: 10px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(53, 167, 255);
+    font-size: 15px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    font-size: large;
+    margin-right: 5px;
+}
+
+.icon-button:hover {
+    background-color: rgb(53, 167, 255, 0.9);
+}
+
+.icon-button.green {
+    background-color: rgb(46, 131, 74, 0.85);
+}
+
+.icon-button.green:hover {
+    background-color: rgb(46, 131, 74, 0.8);
+}
+
+.icon-button.gray {
+    background-color: rgb(102, 137, 161);
+}
+
+.icon-button.gray:hover {
+    background-color: rgb(102, 137, 161, 0.9);
+}
+
+.icon-button.red {
+    background-color: rgb(224, 54, 22);
+}
+
+.icon-button.red:hover {
+    background-color: rgb(224, 54, 22, 0.9);
+}
+
+@media (max-width: 740px) {
+    .graph-item {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+
+    .tracked-lifts-container {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .body-metrics-container {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .action-center {
+        flex-direction: row;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        justify-content: left;
+    }
+}

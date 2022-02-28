@@ -1,0 +1,13 @@
+/* .dropdown {
+    
+} */
+
+.select {
+    font-weight: 500;
+}
+
+@media (max-width: 500px) {
+    .dropdown {
+        max-width: 100%;
+    }
+}

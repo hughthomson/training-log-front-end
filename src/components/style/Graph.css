@@ -1,0 +1,155 @@
+.graph {
+    margin: 5px;
+    border: 1px solid #E5E5E5;
+    border-radius: 5px;
+
+}
+
+.chart {
+    margin: auto;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+.graph-header {
+    font-weight: 500;
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    text-align: left;
+    font-size: 20px;
+}
+
+.info-seperator {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.recent-data {
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    align-items: center;
+    justify-content: flex-start;
+    width:100%;
+}
+
+.recent-data-main {
+    font-weight: 500;
+    margin: 0;
+    font-size: 25px;
+    /* margin-top: 5px;
+    margin-bottom: 5px; */
+    padding-left: 20px;
+    text-align: left;
+}
+
+.arrow {
+    margin: 0 auto;
+    /* display: block; */
+}
+
+.recent-data-percentage {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 2px;
+    border: 1px solid #2E834A;
+    border-radius: 5px;
+    color: #2E834A;
+    background-color: rgb(46, 131, 74, 0.17);
+}
+
+.recent-weight-change {
+    color: #2E834A;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.recent-log > p {
+    font-size: 12px;
+    font-weight: 500;
+    color: #5F6368;
+    margin: 0;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.custom-tooltip {
+    background-color: white;
+    /* box-shadow: 0 1px 5px rgb(0 0 0 / 0.2); */
+    border: 1px solid #d4d4d4;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 500;
+    color: black;
+    padding: 5px;
+    visibility: visible;
+}
+
+.tooltip-date {
+    color: #5F6368;
+}
+
+.time-span {
+    display: flex;
+    flex-direction: row;
+    align-self: flex-end;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    padding-left: 20px;
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
+.time-span-item {
+    padding-left: 10px;
+    padding-right: 10px;
+    border-right: 1px solid #d4d4d4;
+    font-weight: 400;
+    color: #5F6368;
+    cursor: pointer;
+}
+
+.time-span-item:last-child {
+    border: none;
+}
+
+span.active {
+    border-bottom: 3px solid #35A7FF;
+    color: #35A7FF;
+}
+
+@media (max-width: 740px) {
+    #tracked-lifts-header {
+        font-size: 30px;
+    }
+    
+    .graph {
+        border: none;
+        /* border-top: 2px solid rgb(175, 175, 175);
+        border-bottom: 2px solid rgb(175, 175, 175); */
+        border-radius: 0;
+        margin-top: 10px;
+        margin-bottom: 40px;
+    }
+
+    .dashboard-container {
+        padding-left: 10px;
+    }
+
+    .graph-header {
+        font-size: 25px;
+        padding-left: 6px;
+    }
+
+    .info-seperator {
+        margin: 0;
+    }
+}
