@@ -97,9 +97,6 @@ function RecordLog(props) {
   return (
     <div className="record-log">
       <div className="record-log-container">
-        {/* <div className="input-section-box">
-          <h2 id="tracked-lifts-header">Log a Lift</h2>
-        </div> */}
         <div className="input-section">
           <div className="input-card">
               <DropDown options={props.options} value={data.exercise} update={updateExercise} isShowing={props.isShowing} />

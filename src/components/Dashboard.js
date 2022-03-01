@@ -7,9 +7,12 @@ import Nav from './Nav'
 import './style/Dashboard.css'
 import Graph from "./Graph";
 import RecordLogPopUpButton from "./RecordLogPopUpButton"
+import GraphSkeleton from "./skeletons/GraphSkeleton"
 import { AiOutlineHistory } from 'react-icons/ai';
 import { IoSettingsOutline } from 'react-icons/io5';
 import axios from "axios";
+import { Skeleton } from "@mui/material";
+import { borderRadius } from "@mui/system";
 
 function Dashboard() {
 
@@ -176,42 +179,69 @@ function Dashboard() {
     <div className="dashboard">
       <Nav />
       <div className="dashboard-container">
-        <div className="action-center">
-          <RecordLogPopUpButton updateData={getLogData} options={userLifts} />
-          <button className="icon-button green" onClick={() => navigate('/history')}><span className="icon"><AiOutlineHistory /></span> View log history</button>
-          <button className="icon-button gray" onClick={() => navigate('/settings')}><span className="icon"><IoSettingsOutline /></span> Settings</button>
-        </div>
-        <h2 id="tracked-lifts-header">Tracked Lifts</h2>
-      </div>
-      {userDataLoaded ? 
-        <>
-          <div className="tracked-lifts-container">
-            {userDataLoaded ? 
-              userLifts.map(function(lift, index) {
-                return(<Graph data={graphData[lift]} width={windowDimensions.width - 25} height={graphHeight} label={lift} unit={"lbs"} dataKey={"oneRepMax"} key={index} />)
-              })
-              :
-              <div className="nothng">dsfa</div>
-            }
-            {/* <Graph data={data} width={windowDimensions.width - 25} height={graphHeight} label={"Bench Press"} unit={"lbs"} />
-            <Graph data={data} width={windowDimensions.width - 25} height={graphHeight} label={"Squat"} unit={"lbs"} />
-            <Graph data={data} width={windowDimensions.width - 25} height={graphHeight} label={"Deadlift"} unit={"lbs"} />
-            <Graph data={data} width={windowDimensions.width - 25} height={graphHeight} label={"Shoulder Press"} unit={"lbs"} /> */}
+          <div className="action-center">
+          {userDataLoaded ?
+            <>
+              <RecordLogPopUpButton updateData={getLogData} options={userLifts} />
+              <button className="icon-button green" onClick={() => navigate('/history')}><span className="icon"><AiOutlineHistory /></span> View log history</button>
+              <button className="icon-button gray" onClick={() => navigate('/settings')}><span className="icon"><IoSettingsOutline /></span> Settings</button>
+            </>
+            :
+            <>
+            <Skeleton height={34.5} width={103.13} variant={'rectangle'} style={{borderRadius: '5px', margin: '5px 10px 5px 0px'}}  />
+            <Skeleton height={34.5} width={153.2} variant={'rectangle'} style={{borderRadius: '5px', margin: '5px 10px 5px 0px'}}  />
+            <Skeleton height={34.5} width={98.16} variant={'rectangle'} style={{borderRadius: '5px', margin: '5px 10px 5px 0px'}}  />
+            {/* <Skeleton />
+            <Skeleton /> */}
+            </>
+          }
           </div>
 
-          <div className="secondary-section">
-            <div className="dashboard-container">
-              <h2 id="tracked-lifts-header">Body Metrics</h2>
-            </div>
-            <div className="body-metrics-container">
-              <Graph data={null} width={windowDimensions.width - 25} height={graphHeight} label={"Body Weight"} dataKey={"Weight"} unit={"lbs"}/>
-              <Graph data={null} width={windowDimensions.width - 25} height={graphHeight} label={"Calories"} dataKey={"Weight"} unit={"kcal"} />
-            </div>
+
+          {/* <div className="action-center">
+            <RecordLogPopUpButton updateData={getLogData} options={userLifts} />
+            <button className="icon-button green" onClick={() => navigate('/history')}><span className="icon"><AiOutlineHistory /></span> View log history</button>
+            <button className="icon-button gray" onClick={() => navigate('/settings')}><span className="icon"><IoSettingsOutline /></span> Settings</button>
+          </div> */}
+        <h2 id="tracked-lifts-header">Tracked Lifts</h2>
+      </div>
+        <div className="tracked-lifts-container">
+          {userDataLoaded ? 
+            userLifts.map(function(lift, index) {
+              return(<Graph data={graphData[lift]} width={windowDimensions.width - 25} height={graphHeight} label={lift} unit={"lbs"} dataKey={"oneRepMax"} key={index} />)
+            })
+            :
+            <>
+              <GraphSkeleton width={windowDimensions.width - 25} height={graphHeight} />
+              <GraphSkeleton width={windowDimensions.width - 25} height={graphHeight} />
+              <GraphSkeleton width={windowDimensions.width - 25} height={graphHeight} />
+              <GraphSkeleton width={windowDimensions.width - 25} height={graphHeight} />
+            </>
+          }
+          {/* <Graph data={data} width={windowDimensions.width - 25} height={graphHeight} label={"Bench Press"} unit={"lbs"} />
+          <Graph data={data} width={windowDimensions.width - 25} height={graphHeight} label={"Squat"} unit={"lbs"} />
+          <Graph data={data} width={windowDimensions.width - 25} height={graphHeight} label={"Deadlift"} unit={"lbs"} />
+          <Graph data={data} width={windowDimensions.width - 25} height={graphHeight} label={"Shoulder Press"} unit={"lbs"} /> */}
+        </div>
+
+        <div className="secondary-section">
+          <div className="dashboard-container">
+            <h2 id="tracked-lifts-header">Body Metrics</h2>
           </div>
-        </>
-        :
-        <div>loading...</div>
-      }
+          <div className="body-metrics-container">
+            {userDataLoaded ?
+              <>
+                <Graph data={null} width={windowDimensions.width - 25} height={graphHeight} label={"Body Weight"} dataKey={"Weight"} unit={"lbs"}/>
+                <Graph data={null} width={windowDimensions.width - 25} height={graphHeight} label={"Calories"} dataKey={"Weight"} unit={"kcal"} />
+              </>
+              :
+              <>
+                <GraphSkeleton width={windowDimensions.width - 25} height={graphHeight} />
+                <GraphSkeleton width={windowDimensions.width - 25} height={graphHeight} />
+              </>
+            }
+          </div>
+        </div>
     </div>
   );
 }
