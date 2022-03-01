@@ -39,7 +39,7 @@ function RecordLogPopUpButton(props) {
             onClick={inversePopup}><span className="icon"><AiOutlinePlus /></span> Log a lift</button>
 
             <div className="popup-modal" style={{display: isShowing, top: modalTop, left: modalLeft}}>
-                <RecordLog  close={closePopup} isShowing={isShowing} updateData={props.updateData} />
+                <RecordLog  close={closePopup} options={props.options} isShowing={isShowing} updateData={props.updateData} />
             </div>
  
         </div>

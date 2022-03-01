@@ -102,7 +102,7 @@ function RecordLog(props) {
         </div> */}
         <div className="input-section">
           <div className="input-card">
-              <DropDown options={['Squat', 'Deadlift', 'Bench', 'Shoulder Press']} value={data.exercise} update={updateExercise} isShowing={props.isShowing} />
+              <DropDown options={props.options} value={data.exercise} update={updateExercise} isShowing={props.isShowing} />
               <div className="numer-row">
                 <input className="number-input" placeholder="Weight" type={"number"} pattern="\d*"
                   value={data.weight}

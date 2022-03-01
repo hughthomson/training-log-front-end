@@ -18,11 +18,14 @@ function Dashboard() {
   const [graphData, setGraphData] = useState({});
   const [userLifts, setUserLifts] = useState([]);
   const [userDataLoaded, setUserDataLoaded] = useState(false);
-  const [liftGraphs, setLiftGraphs] = useState([]);
   const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
   const navigate = useNavigate();
   const graphHeight = 275
   const baseApiUrl = process.env.REACT_APP_API_ADDRESS
+
+  function shallowCopyObj(obj) {
+    return JSON.parse(JSON.stringify(obj))
+  }
 
   const fetchUserName = async () => {
     try {
@@ -36,36 +39,41 @@ function Dashboard() {
     }
   };
 
-  // const addUser = async () => {
-  //   console.log()
-  //   try {
-  //     axios.post(baseApiUrl + 'add_user', {uid: user?.uid})
-  //     .then(res => {
-  //       console.log(res.data);
-  //     })
-  //   } catch(err) {
-  //     console.log(err)
-  //   }
-  // }
+  const getUserData = async () => {
+    setGraphData(false)
+    
+    let userData = await axios.get(baseApiUrl + 'user/' + user?.uid)
+    let logs = await axios.get(baseApiUrl + 'logs/' + user?.uid)
+    let trackedItems = userData.data.user.tracked_items
+    console.log(logs)
+    let graphPoints = shallowCopyObj(logs.data.logs);
+    let graphDataObj = (createGraphDataObj((trackedItems), (graphPoints)))
+    graphDataObj = (formatGraphData((graphDataObj), (trackedItems)))
 
-  // const getUserLifts = async () => {
-  //   try {
-  //     axios.post(baseApiUrl + 'user_lifts', {uid: user?.uid})
-  //     .then(res => {
-  //       console.log(res.data);
-  //       let userLifts = res.data
-  //       if(userLifts === '') {
-  //         addUser()
-  //       }
-  //     })
-  //   } catch(err) {
-  //     console.log(err)
-  //   }
-  // }
+    setUserLifts(trackedItems)
+    setGraphData(graphDataObj)
+  }
+
+  const getLogData = async () => {
+    let logs = await axios.get(baseApiUrl + 'logs/' + user?.uid)
+    let graphPoints = shallowCopyObj(logs.data.logs);
+    let graphDataObj = (createGraphDataObj((userLifts), (graphPoints)))
+    graphDataObj = (formatGraphData((graphDataObj), (userLifts)))
+    setGraphData(graphDataObj)
+  }
+
+  function calculateOneRepMax(reps, weight) {
+    return(
+      (
+        Math.round(
+          ((parseInt(weight) * parseInt(reps) * (1/30) + parseInt(weight)) + Number.EPSILON
+        ) * 100) / 100
+      )
+    )
+  }
 
   function createGraphDataObj(trackedItems, graphPoints) {
     let graphDataObj = {}
-
     for(let i = 0; i < trackedItems.length; i++) {
       graphDataObj[trackedItems[i]] = []
       for(let j = 0; j < graphPoints.length; j++) {
@@ -76,70 +84,31 @@ function Dashboard() {
     }
 
     return graphDataObj
-
-  }
-
-  const getUserData = async () => {
-    setGraphData(false)
-    let userData = await axios.get(baseApiUrl + 'user/' + user?.uid)
-    let logs = await axios.get(baseApiUrl + 'logs/' + user?.uid)
-
-    let trackedItems = userData.data.user.tracked_items
-    let graphPoints = logs.data.logs;
-    let graphDataObj = formatGraphData(createGraphDataObj(trackedItems, graphPoints), trackedItems)
-    setUserLifts(trackedItems)
-    setGraphData(graphDataObj)
-  }
-
-  const getLogData = async () => {
-    let logs = await axios.get(baseApiUrl + 'logs/' + user?.uid)
-    let graphPoints = logs.data.logs;
-    let graphDataObj = formatGraphData(createGraphDataObj(userLifts, graphPoints), userLifts)
-    setGraphData(graphDataObj)
-  }
-
-  function calculateOneRepMax(reps, weight) {
-    return(
-      (Math.round(
-        ((parseInt(weight) * parseInt(reps) * (1/30) + parseInt(weight)) + Number.EPSILON) * 100) / 100)
-    )
   }
 
   function formatGraphData(data, trackedItems) {
     let graphDataObj = data
 
     for(let i = 0; i < trackedItems.length; i++) {
-      let logs = graphDataObj[trackedItems[i]]
-      logs.sort(function(a, b){
+      let typeOfLogs = graphDataObj[trackedItems[i]]
+      typeOfLogs.sort(function(a, b){
         return new Date(a.date) - new Date(b.date);
       });
     }
 
     for(let i = 0; i < trackedItems.length; i++) {
-      let logs = graphDataObj[trackedItems[i]]
-      if(logs.length === 0) {
-        graphDataObj[trackedItems[i]] = [{
-          date: new Date(),
-          oneRepMax: 0,
-          reps: 0,
-          tracked_item: trackedItems[i],
-          weight: 0,
-        }]
+      let localLogs = graphDataObj[trackedItems[i]]
+      if(localLogs.length === 0) {
+        graphDataObj[trackedItems[i]] = null
       } else {
-        for(let j = 0; j < logs.length; j++) {
-          let date = new Date(logs[j].date)
-          let reps = parseInt(logs[j].reps)
-          let weight = parseInt(logs[j].weight)
-          let oneRepMax = calculateOneRepMax(reps, weight)
-          logs[j].date = date
-          logs[j].reps = reps
-          logs[j].weight = weight
-          logs[j].oneRepMax = oneRepMax
+        for(let j = 0; j < localLogs.length; j++) {
+          localLogs[j].date = new Date(localLogs[j].date.replace(/-/g, '\/').replace(/T.+/, ''))
+          localLogs[j].reps = parseInt(localLogs[j].reps)
+          localLogs[j].weight = parseInt(localLogs[j].weight)
+          localLogs[j].oneRepMax = calculateOneRepMax(localLogs[j].reps, localLogs[j].weight)
         }
       }
     }
-
-    console.log(graphDataObj)
 
     return graphDataObj;
   }
@@ -208,7 +177,7 @@ function Dashboard() {
       <Nav />
       <div className="dashboard-container">
         <div className="action-center">
-          <RecordLogPopUpButton updateData={getLogData} />
+          <RecordLogPopUpButton updateData={getLogData} options={userLifts} />
           <button className="icon-button green" onClick={() => navigate('/history')}><span className="icon"><AiOutlineHistory /></span> View log history</button>
           <button className="icon-button gray" onClick={() => navigate('/settings')}><span className="icon"><IoSettingsOutline /></span> Settings</button>
         </div>
@@ -235,8 +204,8 @@ function Dashboard() {
               <h2 id="tracked-lifts-header">Body Metrics</h2>
             </div>
             <div className="body-metrics-container">
-              {/* <Graph data={data} width={windowDimensions.width - 25} height={graphHeight} label={"Body Weight"} dataKey={"Weight"} unit={"lbs"}/>
-              <Graph data={data} width={windowDimensions.width - 25} height={graphHeight} label={"Calories"} dataKey={"Weight"} unit={"kcal"} /> */}
+              <Graph data={null} width={windowDimensions.width - 25} height={graphHeight} label={"Body Weight"} dataKey={"Weight"} unit={"lbs"}/>
+              <Graph data={null} width={windowDimensions.width - 25} height={graphHeight} label={"Calories"} dataKey={"Weight"} unit={"kcal"} />
             </div>
           </div>
         </>
