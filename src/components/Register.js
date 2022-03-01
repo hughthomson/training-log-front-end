@@ -64,7 +64,7 @@ function Register(props) {
     return (
         <div className="login">
             <div className='content'>
-                <h1>Sign up</h1>
+                <h1 className='register-header' >Sign up</h1>
 
                 <div className='errorField'>
                     <p>{errorText}</p>

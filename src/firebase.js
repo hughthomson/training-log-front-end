@@ -16,6 +16,7 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
+
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -79,7 +80,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
 const sendPasswordReset = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email);
-    alert("Password reset link sent! Check your spam folder if you can't find it");
+    alert("Password reset link sent! If an account with that email exists an email will be sent to your inbox. Check your spam folder if you have trouble finding it.");
   } catch (err) {
     console.error(err);
     alert(err.message);

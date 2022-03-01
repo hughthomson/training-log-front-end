@@ -33,7 +33,7 @@ function Reset(props) {
     return (
         <div className="login">
             <div className='content'>
-                <h1>Reset Password</h1>
+                <h1 className='login-header'>Reset Password</h1>
 
                 <div className='entryField'>
                     <label className={"entryLabel"} htmlFor={"email"} >Email</label>

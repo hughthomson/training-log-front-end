@@ -134,13 +134,13 @@ function Login(props) {
 
                     <MoonLoader className='loader' color={"#35A7FF"} loading={loading} css={override} size={25} />
                     
-                    <label className="stayLoginLabel" htmlFor="permanentLogin">
+                    {/* <label className="stayLoginLabel" htmlFor="permanentLogin">
                         <input type="checkbox" name={"permanentLogin"} id={"permanentLogin"} value="1" checked={checked}
                         onChange={() => {setChecked(!checked)}}
                         />Keep me logged in
-                    </label>
+                    </label> */}
 
-                    <p><a className='link' href="/reset"><span>Forgot your password? </span></a></p>
+                    <p style={{marginTop: '10px'}}><a className='link' href="/reset"><span>Forgot your password? </span></a></p>
                     
                     <hr></hr>
                     

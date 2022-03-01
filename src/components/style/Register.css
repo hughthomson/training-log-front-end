@@ -8,6 +8,12 @@
     font-size: 13px;
 }
 
+.register-header {
+    font-size: 26px;
+    margin: 0;
+    margin-bottom: 30px;
+}
+
 .content {
     text-align: left;
 }
